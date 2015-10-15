@@ -6,7 +6,7 @@ package celli;
 public class Celli {
     public void hi()
     {
-        System.out.println("hiölsdfaöksfjaöf ");
+        System.out.println("hiölsdfaöksf ");
     }
 
 }
