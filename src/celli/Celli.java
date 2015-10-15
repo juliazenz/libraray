@@ -4,5 +4,9 @@ package celli;
  * Created by Celina on 15.10.2015.
  */
 public class Celli {
-    sou
+    public void hi
+    {
+        System.out.println("hi ");
+    }
+
 }
