@@ -50,29 +50,23 @@ public class OverviewServlet extends HttpServlet {
             rd.include(request, response);
 
             for (Book b : bookList) {
-                out.println("<tr>\n"
-                        + "                <td><img src='res/" + b.getPicture()+"'></td>"
-                        + "                <td>"+b.getTitle()+"</td>"
-                         + "                <td>"+b.getAuthor()+"</td>");
-                        if(b.isAvailable())
-                        {
-                            out.println("<td>Verf&uumlgbar</td>");
-                        }
-                        else
-                        {
-                            out.println("<td>nicht Verf&uumlgbar</td>");
-                        }
-                        out.println("</tr>");
-                        
+                out.println("<div class='row'><div id='pic'>");
+                out.println("<img src='res/"+b.getPicture()+"' height='300' width='200'></div>");
+                out.println("<div id='book'><p><b>"+b.getTitle()+"</b> ("+b.getAuthor()+")</p>");
+                if (b.isAvailable()) {
+                    out.println("<p>verf&uuml;gbar</p></div>");
+                } else {
+                    out.println("<p>nicht verf&uuml;gbar</p></div>");
+                }
+                out.println("<div id='rating'><p>***</p></div>");
+                out.println("<div id='detail'><form><input type='button' value='");
+                out.println(b.isAvailable() ? "ausleihen'>" : "reservieren'>");
+                out.println("</form></div>");
+                out.println("</div>");
+
             }
-            out.println("    </table>");
-      
+            out.println("</div></body></html>");
 
-            out.println("</body>\n"
-                    + "</html>");
-
-            
-            
         }
     }
 
@@ -111,14 +105,14 @@ public class OverviewServlet extends HttpServlet {
         while ((line = br.readLine()) != null) {
             feld = line.split(";");
             //String picture, String title, String author, boolean available
-             available = false;
+            available = false;
             if (feld[3].equals("true")) {
                 available = true;
             }
             Book b = new Book(feld[0], feld[1], feld[2], available);
             bookList.add(b);
         }
-       
+
         this.getServletContext().setAttribute("bookList", bookList);
         br.close();
     }

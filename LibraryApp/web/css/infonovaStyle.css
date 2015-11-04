@@ -14,20 +14,9 @@ and open the template in the editor.
     box-sizing: border-box;
 }
 
-.title01 {
+h1 {
     font-family: "Verdana";
     color: #c21731;
-    font-size: 22pt;
-}
-
-p {
-    font-size: 14pt;
-    color: #757a8b;
-}
-
-img {
-    width: 45%;
-    height: auto;
 }
 
 .row:after {
@@ -36,37 +25,153 @@ img {
     display: block;
 }
 
-/* For mobile phones: */
-[class*="col-"] {
-    width: 100%;
+#container{
+	width:960px;
+	margin:0px auto;
 }
-@media only screen and (min-width: 600px) {
-    /* For tablets: */
-    .col-m-1 {width: 8.33%;}
-    .col-m-2 {width: 16.66%;}
-    .col-m-3 {width: 25%;}
-    .col-m-4 {width: 33.33%;}
-    .col-m-5 {width: 41.66%;}
-    .col-m-6 {width: 50%;}
-    .col-m-7 {width: 58.33%;}
-    .col-m-8 {width: 66.66%;}
-    .col-m-9 {width: 75%;}
-    .col-m-10 {width: 83.33%;}
-    .col-m-11 {width: 91.66%;}
-    .col-m-12 {width: 100%;}
+
+.row{
+	width:960px;
+	height:80px;
+	margin:2px auto;
+	border-style:solid;
+	border-color:black;
+	border-width:1px;
+	float:left;
 }
-@media only screen and (min-width: 768px) {
-    /* For desktop: */
-    .col-1 {width: 8.33%;}
-    .col-2 {width: 16.66%;}
-    .col-3 {width: 25%;}
-    .col-4 {width: 33.33%;}
-    .col-5 {width: 41.66%;}
-    .col-6 {width: 50%;}
-    .col-7 {width: 58.33%;}
-    .col-8 {width: 66.66%;}
-    .col-9 {width: 75%;}
-    .col-10 {width: 83.33%;}
-    .col-11 {width: 91.66%;}
-    .col-12 {width: 100%;}
+
+#headLeft{
+	max-width:288px;
+	max-height:100px;
+	float:left;
+}
+
+#headCenter{
+	width:384px;
+	height:100px;
+	text-align:center;
+	float:left;
+}
+
+#headRight{
+	width:288px;
+	height:100px;
+	float:left;
+	text-align:center;
+	vertical-align:center;
+	align:center;
+}
+
+#pic{
+	width:192px;
+	float:left;
+}
+
+#book{
+	width:384px;
+	float:left;
+}
+
+#rating{
+	width:96px;
+	float:left;
+}
+
+#detail{
+	width:288px;
+	float:left;
+}
+
+img{
+	max-height:100%;
+	width:auto;
+}
+
+@media screen and (max-width:959px){
+	#container{
+		width:100%;
+	}
+	
+	.row{
+		width:100%;
+	}
+	
+	#headLeft{
+		width:30%;
+	}
+
+	#headCenter{
+		width:40%;
+	}
+
+	#headRight{
+		width:30%;
+	}
+
+	#pic{
+		width:20%;
+	}
+
+	#book{
+		width:40%;
+	}
+
+	#rating{
+		width:10%;
+	}
+
+	#detail{
+		width:30%;
+	}
+	
+	img{
+		width:100%;
+	}
+}
+
+@media screen and (max-width:640px){
+	#container{
+		width:100%;
+	}
+	
+	.row{
+		width:100%;
+		height:100px;
+	}
+	
+	#headLeft{
+		width:40%;
+		height:50px;
+	}
+
+	#headCenter{
+		width:60%;
+		height:50px;
+	}
+
+	#headRight{
+		width:100%;
+		height:50px;
+	}
+
+	#pic{
+		width:20%;
+	}
+
+	#book{
+		width:40%;
+	}
+
+	#rating{
+		width:10%;
+	}
+
+	#detail{
+		width:30%;
+	}
+	
+	img{
+		width:100%;
+		height:auto;
+	}
 }
