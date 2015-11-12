@@ -32,7 +32,7 @@ h1 {
 
 .row{
 	width:960px;
-	height:80px;
+	height:100px;
 	margin:2px auto;
 	border-style:solid;
 	border-color:black;
@@ -42,20 +42,20 @@ h1 {
 
 #headLeft{
 	max-width:288px;
-	max-height:100px;
+	max-height:120px;
 	float:left;
 }
 
 #headCenter{
 	width:384px;
-	height:100px;
+	height:120px;
 	text-align:center;
 	float:left;
 }
 
 #headRight{
 	width:288px;
-	height:100px;
+	height:120px;
 	float:left;
 	text-align:center;
 	vertical-align:center;
@@ -68,44 +68,52 @@ h1 {
 }
 
 #book{
-	width:384px;
-	float:left;
-}
-
-#rating{
-	width:96px;
-	float:left;
-}
-
-#detail{
 	width:288px;
 	float:left;
 }
 
-img{
-	max-height:100%;
-	width:auto;
+#info{
+	width:192px;
+	float:left;
 }
 
+#lend{
+	width:288px;
+	float:left;
+}
+
+#imgBook{
+	height:98px;
+        width:auto;
+}
+
+#logo{
+    width:100%;
+    height:auto;
+}
 @media screen and (max-width:959px){
-	#container{
+    #container{
 		width:100%;
 	}
 	
 	.row{
 		width:100%;
+		height:100px;
 	}
 	
 	#headLeft{
 		width:30%;
+		height:120px;
 	}
 
 	#headCenter{
 		width:40%;
+		height:120px;
 	}
 
 	#headRight{
 		width:30%;
+		height:120px;
 	}
 
 	#pic{
@@ -113,22 +121,23 @@ img{
 	}
 
 	#book{
-		width:40%;
+		width:30%;
 	}
 
-	#rating{
-		width:10%;
+	#info{
+		width:20%;
 	}
 
-	#detail{
+	#lend{
 		width:30%;
 	}
 	
-	img{
-		width:100%;
+	#imgBook{
+		height:98px;
+                max-width:100%;
+                width:auto;
 	}
 }
-
 @media screen and (max-width:640px){
 	#container{
 		width:100%;
@@ -136,7 +145,7 @@ img{
 	
 	.row{
 		width:100%;
-		height:100px;
+		height:150px;
 	}
 	
 	#headLeft{
@@ -155,23 +164,26 @@ img{
 	}
 
 	#pic{
-		width:20%;
+		width:30%;
 	}
 
 	#book{
-		width:40%;
+		width:70%;
 	}
 
-	#rating{
-		width:10%;
+	#info{
+		width:70%;
+                float: right;
 	}
 
-	#detail{
-		width:30%;
+	#lend{
+		width:70%;
+                float: right;
 	}
 	
-	img{
-		width:100%;
-		height:auto;
+	#imgBook{
+		height:148px;
+                max-width:100%;
+                width:auto;
 	}
 }

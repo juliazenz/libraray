@@ -58,15 +58,11 @@ public class OverviewServlet extends HttpServlet {
                 
                 
                 out.println("<div class='row'><div id='pic'>");
-                out.println("<img src='res/"+b.getPicture()+"' height='300' width='200'></div>");
+                out.println("<img id='imgBook' src='res/"+b.getPicture()+"'></div>");
                 out.println("<div id='book'><p><b>"+b.getTitle()+"</b> ("+b.getAuthor()+")</p>");
-                if (b.isAvailable()) {
-                    out.println("<p>verf&uuml;gbar</p></div>");
-                } else {
-                    out.println("<p>nicht verf&uuml;gbar</p></div>");
-                }
-                out.println("<div id='rating'><p>***</p></div>");
-                out.println("<div id='detail'><form><input type='button' value='");
+             
+                out.println("<div id='info'><p>mehr Infos...</p></div>");
+                out.println("<div id='lend'><form><input type='button' value='");
                 out.println(b.isAvailable() ? "ausleihen'>" : "reservieren'>");
                 out.println("</form></div>");
                 out.println("</div>");
