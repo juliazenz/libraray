@@ -49,11 +49,13 @@ public class OverviewServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/html/overview.html");
             rd.include(request, response);
 
+            out.println("<input type=\"text\" value=\"suchen\">");
+            out.println("<input type=\"button\" value=\"los\">\n</form>\n</div>");
+            
             for (Book b : bookList) {
                  
                             
-                out.println("<input type=\"text\" value=\"suchen\">");
-                out.println("<input type=\"button\" value=\"los\"></form></div>");
+                
                 
                 out.println("<div class='row'><div id='pic'>");
                 out.println("<img src='res/"+b.getPicture()+"' height='300' width='200'></div>");
