@@ -50,6 +50,11 @@ public class OverviewServlet extends HttpServlet {
             rd.include(request, response);
 
             for (Book b : bookList) {
+                 
+                            
+                out.println("<input type=\"text\" value=\"suchen\">");
+                out.println("<input type=\"button\" value=\"los\"></form></div>");
+                
                 out.println("<div class='row'><div id='pic'>");
                 out.println("<img src='res/"+b.getPicture()+"' height='300' width='200'></div>");
                 out.println("<div id='book'><p><b>"+b.getTitle()+"</b> ("+b.getAuthor()+")</p>");
