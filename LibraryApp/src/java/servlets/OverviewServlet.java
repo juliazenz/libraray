@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class OverviewServlet extends HttpServlet {
 
     private LinkedList<Book> bookList = new LinkedList<>();
+    private LinkedList<Book> filterList = new LinkedList<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,24 +50,32 @@ public class OverviewServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/html/overview.html");
             rd.include(request, response);
 
-            out.println("<input type=\"text\" value=\"suchen\">");
-            out.println("<input type=\"button\" value=\"los\">\n</form>\n</div>");
-            
-            for (Book b : bookList) {
-                 out.println("<div class='row'><div id='pic'>");
-                out.println("<img id='imgBook' src='res/"+b.getPicture()+"'></div>");
-                out.println("<div id='book'><p><b>"+b.getTitle()+"</b> ("+b.getAuthor()+")</p>");
-             
+//            for (Book b : bookList) {
+//                out.println("<div class='row'><div id='pic'>");
+//                out.println("<img id='imgBook' src='res/" + b.getPicture() + "'></div>");
+//                out.println("<div id='book'><p><b>" + b.getTitle() + "</b> (" + b.getAuthor() + ")</p></div>");
+//
+//                out.println("<div id='info'><p>mehr Infos...</p></div>");
+//                out.println("<div id='lend'><form><input type='button' value='");
+//                out.println(b.isAvailable() ? "ausleihen'>" : "reservieren'>");
+//                out.println("</div>");
+//                out.println("</div>");
+//
+//            }
+            for (Book b : filterList) {
+                out.println("<div class='row'><div id='pic'>");
+                out.println("<img id='imgBook' src='res/" + b.getPicture() + "'></div>");
+                out.println("<div id='book'><p><b>" + b.getTitle() + "</b> (" + b.getAuthor() + ")</p></div>");
+
                 out.println("<div id='info'><p>mehr Infos...</p></div>");
                 out.println("<div id='lend'><form><input type='button' value='");
                 out.println(b.isAvailable() ? "ausleihen'>" : "reservieren'>");
-                out.println("</form></div>");
                 out.println("</div>");
-
+                out.println("</div>");
             }
             out.println("</div></body></html>");
-
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,6 +90,8 @@ public class OverviewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        
         processRequest(request, response);
     }
 
@@ -89,6 +100,8 @@ public class OverviewServlet extends HttpServlet {
         super.init(config); //To change body of generated methods, choose Tools | Templates.
         try {
             loadData();
+            filterList = (LinkedList<Book>) bookList.clone();
+
         } catch (IOException ex) {
             Logger.getLogger(OverviewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -127,6 +140,21 @@ public class OverviewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String filterStr = request.getParameter("search");
+        //       out.println("<p>Filterstr" + filterStr + "</p>");
+
+        if (!filterStr.equals("") || filterStr != null) {
+            filterList.clear();
+
+            for (Book b : bookList) {
+                if (b.getTitle().contains(filterStr) || b.getAuthor().contains(filterStr)) {
+
+                    filterList.add(b);
+
+                }
+
+            }
+        }
         processRequest(request, response);
     }
 
