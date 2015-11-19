@@ -64,11 +64,11 @@ public class OverviewServlet extends HttpServlet {
 //            }
             for (Book b : filterList) {
                 out.println("<div class='row'><div id='pic'>");
-                out.println("<img id='imgBook' src='res/" + b.getPicture() + "'></div>");
-                out.println("<div id='book'><p><b>" + b.getTitle() + "</b> (" + b.getAuthor() + ")</p><p>"
+                out.println("<a href='DetailServlet'><img id='imgBook' src='res/" + b.getPicture() + "'></a></div>");
+                out.println("<div id='book'><p><a href='DetailServlet' class='bookTitle'>" + b.getTitle() + "</a> (" + b.getAuthor() + ")</p><p>"
                         + b.getLanguage()+ "</p></div>");
 
-                out.println("<div id='info'><p>more Information...</p></div>");
+                out.println("<div id='info'><a href='DetailServlet'>more Information...</a></div>");
                 out.println("<div id='lend'><form><input type='button' value='"+ (b.isAvailable() ? "lend out'>" : "reserve'>"));
                 out.println("</div>");
                 out.println("</div>");

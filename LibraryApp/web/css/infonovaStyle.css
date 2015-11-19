@@ -20,6 +20,14 @@ h1 {
     font-size: 20pt;
 }
 
+.bookTitle{
+    font-family: "Verdana";
+    font-size: 12pt;
+    font-weight: bold;
+    color: #000000;
+    font-style:normal;
+}
+
 .row:after {
     content: "";
     clear: both;
