@@ -65,11 +65,11 @@ public class OverviewServlet extends HttpServlet {
             for (Book b : filterList) {
                 out.println("<div class='row'><div id='pic'>");
                 out.println("<img id='imgBook' src='res/" + b.getPicture() + "'></div>");
-                out.println("<div id='book'><p><b>" + b.getTitle() + "</b> (" + b.getAuthor() + ")</p></div>");
+                out.println("<div id='book'><p><b>" + b.getTitle() + "</b> (" + b.getAuthor() + ")</p><p>"
+                        + b.getLanguage()+ "</p></div>");
 
-                out.println("<div id='info'><p>mehr Infos...</p></div>");
-                out.println("<div id='lend'><form><input type='button' value='");
-                out.println(b.isAvailable() ? "ausleihen'>" : "reservieren'>");
+                out.println("<div id='info'><p>more Information...</p></div>");
+                out.println("<div id='lend'><form><input type='button' value='"+ (b.isAvailable() ? "lend out'>" : "reserve'>"));
                 out.println("</div>");
                 out.println("</div>");
             }
@@ -121,7 +121,7 @@ public class OverviewServlet extends HttpServlet {
             if (feld[3].equals("true")) {
                 available = true;
             }
-            Book b = new Book(feld[0], feld[1], feld[2], available);
+            Book b = new Book(feld[0], feld[1], feld[2], available, feld[4]);
             bookList.add(b);
         }
 

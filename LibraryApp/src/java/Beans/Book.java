@@ -14,12 +14,14 @@ public class Book {
     private String title;
     private String author; 
     private boolean available;
+    private String language;
 
-    public Book(String picture, String title, String author, boolean available) {
+    public Book(String picture, String title, String author, boolean available, String language) {
         this.picture = picture;
         this.title = title;
         this.author = author;
         this.available = available;
+        this.language = language;
     }
 
     public String getPicture() {
@@ -53,6 +55,13 @@ public class Book {
     public void setAvailable(boolean available) {
         this.available = available;
     }
-    
-    
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+   
 }
