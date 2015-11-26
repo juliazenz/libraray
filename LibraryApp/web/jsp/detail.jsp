@@ -4,6 +4,8 @@
     Author     : Julia
 --%>
 
+<%@page import="java.util.LinkedList"%>
+<%@page import="Beans.Book"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,23 +15,32 @@
         <title>Detail</title>
     </head>
     <body>
+        <%! Book book = new Book(); %>
+        <% String bookID = request.getParameter("bookID");
+           LinkedList<Book> booklist = (LinkedList<Book>) request.getServletContext().getAttribute("booklist");
+           for(Book b : booklist){
+               if(b.getBookID().equals(bookID)){
+                   book = b;
+               }
+           }
+        %>
         <table border="0">
             <tbody>
                 <tr>
                     <td>Title:</td>
-                    <td></td>
+                    <td><%=book.getTitle()%></td>
                 </tr>
                 <tr>
                     <td>Author:</td>
-                    <td></td>
+                    <td><%=book.getAuthor()%></td>
                 </tr>
                  <tr>
                     <td>Language:</td>
-                    <td></td>
+                    <td><%=book.getLanguage()%></td>
                 </tr>
                  <tr>
                     <td>Summary:</td>
-                    <td></td>
+                    <td><%=book.getSummary()%></td>
                 </tr>
             </tbody>
         </table>

@@ -24,7 +24,7 @@ public class Book {
     
     
 
-    public Book(String picture, String title, String author, boolean available, String language, String summay) {
+    public Book(String picture, String title, String author, boolean available, String language, String summary) {
         this.picture = picture;
         this.title = title;
         this.author = author;

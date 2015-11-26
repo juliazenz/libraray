@@ -40,7 +40,7 @@ public class DetailServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/jsp/detail.jsp");
             rd.include(request, response);
             
-            LinkedList<Book> bookList = (LinkedList<Book>) request.getServletContext().getAttribute("Buecherliste");
+            LinkedList<Book> bookList = (LinkedList<Book>) request.getServletContext().getAttribute("booklist");
         }
     }
 

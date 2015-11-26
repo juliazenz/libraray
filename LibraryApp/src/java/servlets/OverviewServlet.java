@@ -64,7 +64,7 @@ public class OverviewServlet extends HttpServlet {
 //            }
             for (Book b : filterList) {
                 out.println("<div class='row'><div id='pic'>");
-                out.println("<a href='DetailServlet'><img id='imgBook' src='res/" + b.getPicture() + "'></a></div>");
+                out.println("<a href='DetailServlet?bookID="+b.getBookID()+"'><img id='imgBook' src='res/" + b.getPicture() + "'></a></div>");
                 out.println("<div id='book'><p><a href='DetailServlet' class='bookTitle'>" + b.getTitle() + "</a> (" + b.getAuthor() + ")</p><p>"
                         + b.getLanguage()+ "</p></div>");
 
@@ -73,7 +73,7 @@ public class OverviewServlet extends HttpServlet {
                 out.println("</div>");
                 out.println("</div>");
             }
-            this.getServletContext().setAttribute("Buecherliste", bookList);
+            this.getServletContext().setAttribute("booklist", bookList);
             
             out.println("</div></body></html>");
         }
@@ -123,11 +123,13 @@ public class OverviewServlet extends HttpServlet {
             if (feld[3].equals("true")) {
                 available = true;
             }
+
             Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5]);
+                        System.out.println(b.getSummary());
             bookList.add(b);
         }
 
-        this.getServletContext().setAttribute("bookList", bookList);
+        this.getServletContext().setAttribute("booklist", bookList);
         br.close();
     }
 
