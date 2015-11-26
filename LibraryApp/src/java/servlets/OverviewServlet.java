@@ -69,10 +69,12 @@ public class OverviewServlet extends HttpServlet {
                         + b.getLanguage()+ "</p></div>");
 
                 out.println("<div id='info'><a href='DetailServlet'>more Information...</a></div>");
-                out.println("<div id='lend'><form><input type='button' value='"+ (b.isAvailable() ? "lend out'>" : "reserve'>"));
+                out.println("<div id='lend'><input type='button' value='"+ (b.isAvailable() ? "lend out'>" : "reserve'>"));
                 out.println("</div>");
                 out.println("</div>");
             }
+            this.getServletContext().setAttribute("Buecherliste", bookList);
+            
             out.println("</div></body></html>");
         }
 

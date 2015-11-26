@@ -5,8 +5,10 @@
  */
 package servlets;
 
+import Beans.Book;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,6 +39,8 @@ public class DetailServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             RequestDispatcher rd = request.getRequestDispatcher("/jsp/detail.jsp");
             rd.include(request, response);
+            
+            LinkedList<Book> bookList = (LinkedList<Book>) request.getServletContext().getAttribute("Buecherliste");
         }
     }
 

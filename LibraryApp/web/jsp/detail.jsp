@@ -13,6 +13,26 @@
         <title>Detail</title>
     </head>
     <body>
-        <h1></h1>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td>Title:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Author:</td>
+                    <td></td>
+                </tr>
+                 <tr>
+                    <td>Language:</td>
+                    <td></td>
+                </tr>
+                 <tr>
+                    <td>Summary:</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
     </body>
 </html>
