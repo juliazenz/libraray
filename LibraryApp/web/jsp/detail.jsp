@@ -15,35 +15,41 @@
         <title>Detail</title>
     </head>
     <body>
-        <%! Book book = new Book(); %>
+        <%! Book book = new Book();%>
         <% String bookID = request.getParameter("bookID");
-           LinkedList<Book> booklist = (LinkedList<Book>) request.getServletContext().getAttribute("booklist");
-           for(Book b : booklist){
-               if(b.getBookID().equals(bookID)){
-                   book = b;
-               }
-           }
+            LinkedList<Book> booklist = (LinkedList<Book>) request.getServletContext().getAttribute("booklist");
+            for (Book b : booklist) {
+                if (b.getBookID().equals(bookID)) {
+                    book = b;
+                }
+            }
         %>
-        <table border="0">
-            <tbody>
-                <tr>
-                    <td>Title:</td>
-                    <td><%=book.getTitle()%></td>
-                </tr>
-                <tr>
-                    <td>Author:</td>
-                    <td><%=book.getAuthor()%></td>
-                </tr>
-                 <tr>
-                    <td>Language:</td>
-                    <td><%=book.getLanguage()%></td>
-                </tr>
-                 <tr>
-                    <td>Summary:</td>
-                    <td><%=book.getSummary()%></td>
-                </tr>
-            </tbody>
-        </table>
+    <center>
+        <div id='leftDetail'>
+            <table border="0">
+                <tbody>
+                    <tr>
+                        <td><h1><%=book.getTitle()%></h1></td>
+                    </tr>
+                    <tr>
+                        <td><h3>from <%=book.getAuthor()%> (Author)</h3></td>
+                    </tr>
+                    <tr>
+                        <td><p><i><%=book.getLanguage()%></i></p></td>
+                    </tr>
+                    <tr>
+                        <td><%=book.getSummary()%></td>
+                    </tr>
+                    <tr>
+                        <td><a href='OverviewServlet'>Zur&uuml;ck</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id='rightDetail'> 
+            <img id='imgBook' src='res/<%=book.getPicture() %>'/>
+        </div>
+    </center>
 
-    </body>
+</body>
 </html>
