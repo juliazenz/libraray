@@ -16,6 +16,13 @@ public class Book {
     private boolean available;
     private String language;
     private String summary;
+    private String bookID = java.util.UUID.randomUUID().toString();
+
+    public Book() {
+       
+    }
+    
+    
 
     public Book(String picture, String title, String author, boolean available, String language, String summay) {
         this.picture = picture;
@@ -73,5 +80,16 @@ public class Book {
     public void setLanguage(String language) {
         this.language = language;
     }
+
+    public String getBookID() {
+        return bookID;
+    }
+
+    public void setBookID(String bookID) {
+        this.bookID = bookID;
+    }
+
+    
    
+    
 }
