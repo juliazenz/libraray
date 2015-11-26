@@ -125,7 +125,6 @@ public class OverviewServlet extends HttpServlet {
             }
 
             Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5]);
-                        System.out.println(b.getSummary());
             bookList.add(b);
         }
 
