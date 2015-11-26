@@ -15,13 +15,23 @@ public class Book {
     private String author; 
     private boolean available;
     private String language;
+    private String summary;
 
-    public Book(String picture, String title, String author, boolean available, String language) {
+    public Book(String picture, String title, String author, boolean available, String language, String summay) {
         this.picture = picture;
         this.title = title;
         this.author = author;
         this.available = available;
         this.language = language;
+        this.summary = summary;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getPicture() {

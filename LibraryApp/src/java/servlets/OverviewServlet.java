@@ -123,7 +123,7 @@ public class OverviewServlet extends HttpServlet {
             if (feld[3].equals("true")) {
                 available = true;
             }
-            Book b = new Book(feld[0], feld[1], feld[2], available, feld[4]);
+            Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5]);
             bookList.add(b);
         }
 
