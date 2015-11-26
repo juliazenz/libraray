@@ -1,0 +1,103 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26.11.2015, 14:08:52
+    Author     : Julia
+*/
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27.10.2015, 08:57:51
+    Author     : Julia
+*/
+
+* {
+    font-family: "Verdana";
+    font-size: 10pt;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: "Verdana";
+    color: #c21731;
+    font-size: 20pt;
+}
+
+
+#container{
+    width:960px;
+    margin:0px auto;
+}
+
+#leftDetail{
+    width:576px;
+    float:left;
+}
+
+#rightDetail{
+    width:384px;
+    float:left;
+}
+
+#imgBook{
+    width: 380px;
+    height:auto;
+}
+
+#logo{
+    width:100%;
+    height:auto;
+}
+
+input {
+    height: auto;
+}
+@media screen and (max-width:959px){
+    #container{
+        width:100%;
+    }
+
+    #leftDetail{
+    width:60%;
+}
+
+    #rightDetail{
+    width:40%;
+    }
+
+    #imgBook{
+        height:380px;
+        max-width:100%;
+        width:auto;
+    }
+}
+@media screen and (max-width:640px){
+    #container{
+        width:100%;
+    }
+
+    h1{
+        font-size: 16pt;
+    }
+
+    #leftDetail{
+    width:70%;
+}
+
+    #rightDetail{
+    width:30%;
+    }
+    
+    #imgBook{
+        width:100%;
+        max-width: 100%;
+        height: auto;
+    }
+}
