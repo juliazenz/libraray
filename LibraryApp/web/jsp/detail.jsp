@@ -40,7 +40,9 @@
                         <tr>
                             <td><%=book.getSummary()%></td>
                         </tr>
-                        <tr><td> </td></tr>
+                        <tr></tr>
+                        <tr><td><%=book.getYearOfPublication()%></td></tr>
+                        <tr></tr>
                         <tr>
                             <td><a href='OverviewServlet'>Back to Overview</a></td>
                         </tr>
