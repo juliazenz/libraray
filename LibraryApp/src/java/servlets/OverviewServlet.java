@@ -13,6 +13,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
+import java.util.TreeMap;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -31,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 public class OverviewServlet extends HttpServlet {
 
     private LinkedList<Book> bookList = new LinkedList<>();
-    private LinkedList<Book> filterList = new LinkedList<>();
+    private TreeMap<String, Book> bookMap = new TreeMap<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,20 +64,23 @@ public class OverviewServlet extends HttpServlet {
 //                out.println("</div>");
 //
 //            }
-            for (Book b : filterList) {
-                out.println("<div class='row'><div id='pic'>");
-                out.println("<a href='DetailServlet?bookID="+b.getBookID()+"'><img id='imgBook' src='res/" + b.getPicture() + "'></a></div>");
-                out.println("<div id='book'><p><a href='DetailServlet?bookID="+b.getBookID()+"' class='bookTitle'>" + b.getTitle() + "</a> (" + b.getAuthor() + ")</p><p>"
-                        + b.getLanguage()+ "</p></div>");
+            LinkedList<Book> filterList = (LinkedList<Book>) request.getSession().getAttribute("filterList");
+            if (filterList != null) {
+                for (Book b : filterList) {
+                    out.println("<div class='row'><div id='pic'>");
+                    out.println("<a href='DetailServlet?bookID=" + b.getBookID() + "'><img id='imgBook' src='res/" + b.getPicture() + "'></a></div>");
+                    out.println("<div id='book'><p><a href='DetailServlet?bookID=" + b.getBookID() + "' class='bookTitle'>" + b.getTitle() + "</a> (" + b.getAuthor() + ")</p><p>"
+                            + b.getLanguage() + "</p></div>");
 
-                out.println("<div id='info'><a href='DetailServlet?bookID="+b.getBookID()+"'>more Information...</a></div>");
-                out.println("<div id='lend'><input type='button' value='"+ (b.isAvailable() ? "lend out'>" : "reserve'>"));
-                out.println("</div>");
-                out.println("</div>");
+                    out.println("<div id='info'><a href='DetailServlet?bookID=" + b.getBookID() + "'>more Information...</a></div>");
+                    out.println("<div id='lend'><input type='button' value='" + (b.isAvailable() ? "lend out'>" : "reserve'>"));
+                    out.println("</div>");
+                    out.println("</div>");
+                }
+                this.getServletContext().setAttribute("booklist", bookList);
+
+                out.println("</div></body></html>");
             }
-            this.getServletContext().setAttribute("booklist", bookList);
-            
-            out.println("</div></body></html>");
         }
 
     }
@@ -93,7 +98,10 @@ public class OverviewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
+        if(request.getSession().getAttribute("filterList") == null){
+            LinkedList<Book> filterList = (LinkedList<Book>) bookList.clone();
+            request.getSession().setAttribute("filterList", filterList);
+        }
         processRequest(request, response);
     }
 
@@ -102,7 +110,7 @@ public class OverviewServlet extends HttpServlet {
         super.init(config); //To change body of generated methods, choose Tools | Templates.
         try {
             loadData();
-            filterList = (LinkedList<Book>) bookList.clone();
+            
 
         } catch (IOException ex) {
             Logger.getLogger(OverviewServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,11 +132,13 @@ public class OverviewServlet extends HttpServlet {
                 available = true;
             }
 
-            Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5]);
+            Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5], Integer.parseInt(feld[6]));
             bookList.add(b);
+            bookMap.put(UUID.randomUUID().toString(), b);
         }
 
         this.getServletContext().setAttribute("booklist", bookList);
+        this.getServletContext().setAttribute("bookmap", bookMap);
         br.close();
     }
 
@@ -144,20 +154,18 @@ public class OverviewServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String filterStr = request.getParameter("search");
-        //       out.println("<p>Filterstr" + filterStr + "</p>");
+        LinkedList<Book> filterList = (LinkedList<Book>) request.getSession().getAttribute("filterList");
 
         if (!filterStr.equals("") || filterStr != null) {
             filterList.clear();
-
             for (Book b : bookList) {
-                if (b.getTitle().contains(filterStr) || b.getAuthor().contains(filterStr)) {
-
+                if (b.getTitle().toLowerCase().contains(filterStr.toLowerCase()) || b.getAuthor().toLowerCase().contains(filterStr.toLowerCase())) {
                     filterList.add(b);
-
                 }
 
             }
         }
+        request.getSession().setAttribute("filterList", filterList);
         processRequest(request, response);
     }
 
