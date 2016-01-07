@@ -10,17 +10,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/cssmenu/styles.css">
         <link href="css/infonovaStyleOverview.css" rel="stylesheet" type="text/css"/>
-        <link href="css/cssmenu/index.html"/>
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <script src="css/cssmenu/script.js"></script>
         <title>Book Overview</title>
     </head>
     <body>
+
+        
         <%! LinkedList<Book> bookList = new LinkedList<>();
             LinkedList<Book> filteredList = new LinkedList<>();
             String searchString = "";
         %>
+        <jsp:include page="/css/cssmenu/index.html"></jsp:include>
         <div id="container">
             <div id="headLeft">
                 <img id="logo" src="res/infonova.png" alt="infonova">
@@ -55,7 +62,7 @@
                             <%=b.getLanguage()%></p></div>
 
                     <div id='info'><a href='DetailServlet?bookID=<%=b.getBookID()%>'>more Information...</a></div>
-                    <div id='lend'><input type='button' value='<%=(b.isAvailable() )? "lend out" : "reserve"%>'>
+                    <div id='lend'><input type='button' value='<%=(b.isAvailable()) ? "lend out" : "reserve"%>'>
                     </div>
                 </div>
                 <% }
