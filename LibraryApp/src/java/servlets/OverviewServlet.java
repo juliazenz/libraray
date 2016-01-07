@@ -13,8 +13,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
-import java.util.TreeMap;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -32,8 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "OverviewServlet", urlPatterns = {"/OverviewServlet"})
 public class OverviewServlet extends HttpServlet {
 
-    private LinkedList<Book> bookList = new LinkedList<>();
-    private TreeMap<String, Book> bookMap = new TreeMap<>();
+    private final LinkedList<Book> bookList = new LinkedList<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,40 +46,9 @@ public class OverviewServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            RequestDispatcher rd = request.getRequestDispatcher("/html/overview.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/jsp/overview.jsp");
             rd.include(request, response);
-
-//            for (Book b : bookList) {
-//                out.println("<div class='row'><div id='pic'>");
-//                out.println("<img id='imgBook' src='res/" + b.getPicture() + "'></div>");
-//                out.println("<div id='book'><p><b>" + b.getTitle() + "</b> (" + b.getAuthor() + ")</p></div>");
-//
-//                out.println("<div id='info'><p>mehr Infos...</p></div>");
-//                out.println("<div id='lend'><form><input type='button' value='");
-//                out.println(b.isAvailable() ? "ausleihen'>" : "reservieren'>");
-//                out.println("</div>");
-//                out.println("</div>");
-//
-//            }
-            LinkedList<Book> filterList = (LinkedList<Book>) request.getSession().getAttribute("filterList");
-            if (filterList != null) {
-                for (Book b : filterList) {
-                    out.println("<div class='row'><div id='pic'>");
-                    out.println("<a href='DetailServlet?bookID=" + b.getBookID() + "'><img id='imgBook' src='res/" + b.getPicture() + "'></a></div>");
-                    out.println("<div id='book'><p><a href='DetailServlet?bookID=" + b.getBookID() + "' class='bookTitle'>" + b.getTitle() + "</a> (" + b.getAuthor() + ")</p><p>"
-                            + b.getLanguage() + "</p></div>");
-
-                    out.println("<div id='info'><a href='DetailServlet?bookID=" + b.getBookID() + "'>more Information...</a></div>");
-                    out.println("<div id='lend'><input type='button' value='" + (b.isAvailable() ? "lend out'>" : "reserve'>"));
-                    out.println("</div>");
-                    out.println("</div>");
-                }
-                this.getServletContext().setAttribute("booklist", bookList);
-
-                out.println("</div></body></html>");
-            }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -110,7 +76,6 @@ public class OverviewServlet extends HttpServlet {
         super.init(config); //To change body of generated methods, choose Tools | Templates.
         try {
             loadData();
-            
 
         } catch (IOException ex) {
             Logger.getLogger(OverviewServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -134,11 +99,9 @@ public class OverviewServlet extends HttpServlet {
 
             Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5], Integer.parseInt(feld[6]));
             bookList.add(b);
-            bookMap.put(UUID.randomUUID().toString(), b);
         }
 
-        this.getServletContext().setAttribute("booklist", bookList);
-        this.getServletContext().setAttribute("bookmap", bookMap);
+        this.getServletContext().setAttribute("bookList", bookList);
         br.close();
     }
 
@@ -162,8 +125,8 @@ public class OverviewServlet extends HttpServlet {
                 if (b.getTitle().toLowerCase().contains(filterStr.toLowerCase()) || b.getAuthor().toLowerCase().contains(filterStr.toLowerCase())) {
                     filterList.add(b);
                 }
-
             }
+            request.setAttribute("search", filterStr);
         }
         request.getSession().setAttribute("filterList", filterList);
         processRequest(request, response);
