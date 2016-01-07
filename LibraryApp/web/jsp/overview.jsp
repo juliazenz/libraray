@@ -13,7 +13,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="css/infonovaStyleOverview.css" rel="stylesheet" type="text/css"/>
-        <!--   <link href="css/cssmenu/index.html"/> -->
+        <link href="css/cssmenu/index.html"/>
         <title>Book Overview</title>
     </head>
     <body>
