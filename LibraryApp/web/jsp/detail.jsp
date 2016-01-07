@@ -14,16 +14,24 @@
         <link href="css/infonovaStyleDetail.css" rel="stylesheet" type="text/css"/>
         <title>Detail</title>
     </head>
-    <body>
+    <body>  
         <%! Book book = new Book();%>
+
+        
+        
         <% String bookID = request.getParameter("bookID");
-            LinkedList<Book> booklist = (LinkedList<Book>) request.getServletContext().getAttribute("booklist");
-            for (Book b : booklist) {
-                if (b.getBookID().equals(bookID)) {
-                    book = b;
+            LinkedList<Book> booklist = (LinkedList<Book>) request.getServletContext().getAttribute("bookList");
+            if (booklist.size() > 0) {
+                for (Book b : booklist) {
+                    if (b.getBookID().equals(bookID)) {
+                        book = b;
+                    }
                 }
             }
         %>
+
+        <h1><% booklist.size();%></h1>
+
         <div id="container">
             <div id="leftDetail">
                 <table border="0">
@@ -40,9 +48,7 @@
                         <tr>
                             <td><%=book.getSummary()%></td>
                         </tr>
-                        <tr></tr>
-                        <tr><td><%=book.getYearOfPublication()%></td></tr>
-                        <tr></tr>
+                        <tr><td> <p><i><b>Status:</b></i><%=book.isAvailable() ? " available" : " not available"%></p></td></tr>
                         <tr>
                             <td><a href='OverviewServlet'>Back to Overview</a></td>
                         </tr>
@@ -52,8 +58,7 @@
             <div id="rightDetail"> 
                 <form>
                     <img id="imgBook" src='res/<%=book.getPicture()%>'/>
-                    <p><%=book.isAvailable() ? "available" : "not available"%></p>
-                    <input type="button" value=<%=book.isAvailable() ? "lend out" : "reserve"%>>
+                   <input type='button' value='<%=(book.isAvailable() )? "lend out" : "reserve"%>'>
                 </form>
             </div>
         </div>
