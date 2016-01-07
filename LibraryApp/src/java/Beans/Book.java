@@ -17,15 +17,14 @@ public class Book {
     private int yearOfPublication;
     private String language;
     private String summary;
+    private String amazonlink;
     private String bookID = java.util.UUID.randomUUID().toString();
 
     public Book() {
        
     }
     
-    
-
-    public Book(String picture, String title, String author, boolean available, String language, String summary, int yearOfPublication) {
+    public Book(String picture, String title, String author, boolean available, String language, String summary, int yearOfPublication, String amazon) {
         this.picture = picture;
         this.title = title;
         this.author = author;
@@ -33,6 +32,7 @@ public class Book {
         this.language = language;
         this.summary = summary;
         this.yearOfPublication = yearOfPublication;
+        this.amazonlink = amazon;
     }
 
     public String getSummary() {
@@ -98,8 +98,13 @@ public class Book {
     public void setYearOfPublication(int yearOfPublication) {
         this.yearOfPublication = yearOfPublication;
     }
-
-    
    
+    public String getAmazonlink() {
+        return amazonlink;
+    }
+
+    public void setAmazonlink(String amazonlink) {
+        this.amazonlink = amazonlink;
+    }
     
 }

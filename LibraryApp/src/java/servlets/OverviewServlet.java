@@ -82,29 +82,6 @@ public class OverviewServlet extends HttpServlet {
         }
     }
 
-    public void loadData() throws FileNotFoundException, IOException {
-        String path = this.getServletContext().getRealPath("/res" + File.separator + "buchdaten.csv");
-        FileReader fr = new FileReader(path);
-        BufferedReader br = new BufferedReader(fr);
-        String line = "";
-        String feld[] = null;
-        boolean available;
-        while ((line = br.readLine()) != null) {
-            feld = line.split(";");
-            //String picture, String title, String author, boolean available
-            available = false;
-            if (feld[3].equals("true")) {
-                available = true;
-            }
-
-            Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5], Integer.parseInt(feld[6]));
-            bookList.add(b);
-        }
-
-        this.getServletContext().setAttribute("bookList", bookList);
-        br.close();
-    }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -142,4 +119,27 @@ public class OverviewServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    
+    public void loadData() throws FileNotFoundException, IOException {
+        String path = this.getServletContext().getRealPath("/res" + File.separator + "buchdaten.csv");
+        FileReader fr = new FileReader(path);
+        BufferedReader br = new BufferedReader(fr);
+        String line = "";
+        String feld[] = null;
+        boolean available;
+        while ((line = br.readLine()) != null) {
+            feld = line.split(";");
+            //String picture, String title, String author, boolean available
+            available = false;
+            if (feld[3].equals("true")) {
+                available = true;
+            }
+
+            Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5], Integer.parseInt(feld[6]), feld[7]);
+            bookList.add(b);
+        }
+
+        this.getServletContext().setAttribute("bookList", bookList);
+        br.close();
+    }
 }
