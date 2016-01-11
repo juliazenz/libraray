@@ -12,12 +12,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/infonovaStyleDetail.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/cssmenu/styles.css">
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <script src="css/cssmenu/script.js"></script>
         <title>Detail</title>
     </head>
     <body>  
-        <%! Book book = new Book();%>
-
+        <%! Book book = new Book();%>      
         
+        <jsp:include page="/css/cssmenu/index.html"></jsp:include>
         
         <% String bookID = request.getParameter("bookID");
             LinkedList<Book> booklist = (LinkedList<Book>) request.getServletContext().getAttribute("bookList");
@@ -50,7 +53,10 @@
                         </tr>
                         <tr><td> <p><i><b>Status:</b></i><%=book.isAvailable() ? " available" : " not available"%></p></td></tr>
                         <tr>
-                            <td><a href='OverviewServlet'>Back to Overview</a></td>
+                            <td><a href=<%=book.getAmazonlink()%>>To Amazon</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href='OverviewServlet'><- Back to Overview</a></td>
                         </tr>
                     </tbody>
                 </table>

@@ -14,8 +14,8 @@
         <meta charset='utf-8'>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/cssmenu/styles.css">
         <link href="css/infonovaStyleOverview.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/cssmenu/styles.css">
         <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
         <script src="css/cssmenu/script.js"></script>
         <title>Book Overview</title>
