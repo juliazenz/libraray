@@ -103,7 +103,7 @@ public class OverviewServlet extends HttpServlet {
                     filterList.add(b);
                 }
             }
-            request.setAttribute("search", filterStr);
+            request.getSession().setAttribute("search", filterStr);
         }
         request.getSession().setAttribute("filterList", filterList);
         processRequest(request, response);
