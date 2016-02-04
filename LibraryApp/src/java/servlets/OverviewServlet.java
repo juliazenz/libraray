@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class OverviewServlet extends HttpServlet {
 
     private final LinkedList<Book> bookList = new LinkedList<>();
+    private final LinkedList<String> empList = new LinkedList<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -138,8 +139,17 @@ public class OverviewServlet extends HttpServlet {
             Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5], Integer.parseInt(feld[6]), feld[7]);
             bookList.add(b);
         }
-
-        this.getServletContext().setAttribute("bookList", bookList);
         br.close();
+        
+        // Employees einlesen
+        path = this.getServletContext().getRealPath("/res" + File.separator + "Mitarbeiter_Liste_20151119.txt");
+        fr = new FileReader(path);
+        br = new BufferedReader(fr);
+        while ((line = br.readLine()) != null) {
+            empList.add(line);
+        }
+        this.getServletContext().setAttribute("bookList", bookList);
+        this.getServletContext().setAttribute("empList", empList);
+        
     }
 }

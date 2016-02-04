@@ -8,6 +8,8 @@ package servlets;
 import Beans.Book;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,10 +39,15 @@ public class DetailServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            RequestDispatcher rd = request.getRequestDispatcher("/jsp/detail.jsp");
-            rd.include(request, response);
-            
-            LinkedList<Book> bookList = (LinkedList<Book>) request.getServletContext().getAttribute("bookList");
+            if (request.getParameter("action") == null) {
+                RequestDispatcher rd = request.getRequestDispatcher("/jsp/detail.jsp");
+                rd.forward(request, response);
+            }
+            else if(request.getParameter("action").equals("reserve")){
+                RequestDispatcher rd = request.getRequestDispatcher("/jsp/reserveBook.jsp");
+                rd.forward(request, response);
+            }
+           // LinkedList<Book> bookList = (LinkedList<Book>) request.getServletContext().getAttribute("bookList");
         }
     }
 

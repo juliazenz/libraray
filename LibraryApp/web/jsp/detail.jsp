@@ -62,9 +62,10 @@
                 </table>
             </div>
             <div id="rightDetail"> 
-                <form>
+                <% String action = (book.isAvailable()) ? "loan" : "reserve";%>
+                <form action="DetailServlet">
                     <img id="imgBook" src='res/<%=book.getPicture()%>'/>
-                   <input type='button' value='<%=(book.isAvailable() )? "lend out" : "reserve"%>'>
+                   <a href='DetailServlet?bookID=<%=book.getBookID()%>&action=<%=action%>'><input type='button' value='<%=action%>'/></a>
                 </form>
             </div>
         </div>

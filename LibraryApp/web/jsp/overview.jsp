@@ -22,20 +22,20 @@
     </head>
     <body>
 
-        
+
         <%! LinkedList<Book> bookList = new LinkedList<>();
             LinkedList<Book> filteredList = new LinkedList<>();
             String searchString = "";
         %>
         <jsp:include page="/css/cssmenu/index.html"></jsp:include>
-        <div id="container">
-            <div id="headLeft">
-                <img id="logo" src="res/infonova.png" alt="infonova">
-            </div>
-            <div id="headCenter">
-                <h1>Library</h1>
-            </div>
-            <form action="OverviewServlet" method="post">
+            <div id="container">
+                <div id="headLeft">
+                    <img id="logo" src="res/infonova.png" alt="infonova">
+                </div>
+                <div id="headCenter">
+                    <h1>Library</h1>
+                </div>
+                <form action="OverviewServlet" method="post">
                 <% searchString = (String) (session.getAttribute("search") != null ? session.getAttribute("search") : "");%>
                 <div id="headRight">
                     <input type="text" name="search" value="<%=searchString%>"/>
@@ -51,7 +51,8 @@
                             filteredList = (LinkedList<Book>) bookList.clone();
                         }
                         if (filteredList != null) {
-                            for (Book b : filteredList) {%>
+                            for (Book b : filteredList) {
+                                String action = (b.isAvailable()) ? "loan" : "reserve";%>
                 <div class='row'>
                     <div id='pic'>
                         <a href='DetailServlet?bookID=<%=b.getBookID()%>'>
@@ -62,7 +63,8 @@
                             <%=b.getLanguage()%></p></div>
 
                     <div id='info'><a href='DetailServlet?bookID=<%=b.getBookID()%>'>more Information...</a></div>
-                    <div id='lend'><input type='button' value='<%=(b.isAvailable()) ? "lend out" : "reserve"%>'>
+                    <div id='lend'>
+                        <a href='DetailServlet?bookID=<%=b.getBookID()%>&action=<%=action%>'><input type='button' value='<%=action%>'/></a>
                     </div>
                 </div>
                 <% }
