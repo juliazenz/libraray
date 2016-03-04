@@ -65,7 +65,7 @@ public class OverviewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if(request.getSession().getAttribute("filterList") == null){
+        if (request.getSession().getAttribute("filterList") == null) {
             LinkedList<Book> filterList = (LinkedList<Book>) bookList.clone();
             request.getSession().setAttribute("filterList", filterList);
         }
@@ -120,7 +120,6 @@ public class OverviewServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
     public void loadData() throws FileNotFoundException, IOException {
         String path = this.getServletContext().getRealPath("/res" + File.separator + "buchdaten.csv");
         FileReader fr = new FileReader(path);
@@ -140,7 +139,7 @@ public class OverviewServlet extends HttpServlet {
             bookList.add(b);
         }
         br.close();
-        
+
         // Employees einlesen
         path = this.getServletContext().getRealPath("/res" + File.separator + "Mitarbeiter_Liste_20151119.txt");
         fr = new FileReader(path);
@@ -150,6 +149,6 @@ public class OverviewServlet extends HttpServlet {
         }
         this.getServletContext().setAttribute("bookList", bookList);
         this.getServletContext().setAttribute("empList", empList);
-        
+
     }
 }

@@ -20,24 +20,24 @@
     <body>
         <jsp:include page="/css/cssmenu/index.html"></jsp:include>
         <center>
-        <h1>Add a new book to the library</h1>
-        <form action="AddBookServlet" method="POST">
-            <table border="0">
-                <tbody>
-                    <tr>
-                        <td>Title:</td>
-                        <td><input type="text" name="title"/></td>
-                    </tr>
-                    <tr>
-                        <td>Author(s):</td>
-                        <td><input type="text" name="author"/></td>
-                    </tr>
-                    <tr>
-                        <td>Year of Publication:</td>
-                        <td><select name="year">
-                                <% for(int i=0; i < 50; i++){
-                                    out.println("<option>"+LocalDate.now().minusYears(i).getYear()+"</option>");
-                                }%>
+            <h1>Add a new book to the library</h1>
+            <form action="AddBookServlet" method="POST">
+                <table border="0">
+                    <tbody>
+                        <tr>
+                            <td>Title:</td>
+                            <td><input type="text" name="title"/></td>
+                        </tr>
+                        <tr>
+                            <td>Author(s):</td>
+                            <td><input type="text" name="author"/></td>
+                        </tr>
+                        <tr>
+                            <td>Year of Publication:</td>
+                            <td><select name="year">
+                                <% for (int i = 0; i < 50; i++) {
+                                        out.println("<option>" + LocalDate.now().minusYears(i).getYear() + "</option>");
+                                    }%>
                             </select>
                         </td>
                     </tr>
@@ -59,12 +59,13 @@
                         <td><input type="file" name="picture" accept="image/*"/></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="cancle" name="eve"/></td>
-                        <td><input type="submit" value="add Book" name="eve"/></td>
-                    </tr>
+
+                        <td><input type="reset" value="cancle" name="eve"/></td>
+                        <td><input type="submit" value="add Book" name="eve"/></td></tr>
+                    <tr><td><a href='OverviewServlet'> Back to Overview</a></td></tr>
                 </tbody>
             </table>
         </form>
-        </center>
-    </body>
+    </center>
+</body>
 </html>

@@ -9,3 +9,8 @@ function showReserve(input){
     alert("Employee '"+emp+"' reserves Book.");
 }
 
+function showLend(input){
+   // var titel =  document.getElementsByName("titel")[0].value;
+    var emp =  document.getElementsByName("nameEMP")[0].value;
+    alert("Employee '"+emp+"' lend Book out.");
+}

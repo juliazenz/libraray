@@ -56,13 +56,13 @@
                             <td><a href=<%=book.getAmazonlink()%>>To Amazon</a></td>
                         </tr>
                         <tr>
-                            <td><a href='OverviewServlet'><- Back to Overview</a></td>
+                            <td><a href='OverviewServlet'>Back to Overview</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div id="rightDetail"> 
-                <% String action = (book.isAvailable()) ? "loan" : "reserve";%>
+                <% String action = (book.isAvailable()) ? "lend out" : "reserve";%>
                 <form action="DetailServlet">
                     <img id="imgBook" src='res/<%=book.getPicture()%>'/>
                    <a href='DetailServlet?bookID=<%=book.getBookID()%>&action=<%=action%>'><input type='button' value='<%=action%>'/></a>

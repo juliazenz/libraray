@@ -47,6 +47,10 @@ public class DetailServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/jsp/reserveBook.jsp");
                 rd.forward(request, response);
             }
+             else if(request.getParameter("action").equals("lend out")){
+                RequestDispatcher rd = request.getRequestDispatcher("/jsp/lendBook.jsp");
+                rd.forward(request, response);
+            }
            // LinkedList<Book> bookList = (LinkedList<Book>) request.getServletContext().getAttribute("bookList");
         }
     }
