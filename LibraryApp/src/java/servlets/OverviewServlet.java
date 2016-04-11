@@ -6,6 +6,7 @@
 package servlets;
 
 import Beans.Book;
+import database.DBAccess;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,8 +31,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "OverviewServlet", urlPatterns = {"/OverviewServlet"})
 public class OverviewServlet extends HttpServlet {
 
-    private final LinkedList<Book> bookList = new LinkedList<>();
-    private final LinkedList<String> empList = new LinkedList<>();
+    private LinkedList<Book> bookList = new LinkedList<>();
+    private LinkedList<String> empList = new LinkedList<>();
+    private DBAccess dba;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,8 +79,14 @@ public class OverviewServlet extends HttpServlet {
         super.init(config); //To change body of generated methods, choose Tools | Templates.
         try {
             loadData();
+            dba = DBAccess.getInstance();
+            bookList = dba.getAllBooks();
 
         } catch (IOException ex) {
+            Logger.getLogger(OverviewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OverviewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(OverviewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -135,7 +143,7 @@ public class OverviewServlet extends HttpServlet {
                 available = true;
             }
 
-            Book b = new Book(feld[0], feld[1], feld[2], available, feld[4], feld[5], Integer.parseInt(feld[6]), feld[7]);
+            Book b = new Book();
             bookList.add(b);
         }
         br.close();

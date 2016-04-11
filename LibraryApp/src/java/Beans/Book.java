@@ -5,6 +5,8 @@
  */
 package Beans;
 
+import java.util.Date;
+
 /**
  *
  * @author pruta_000
@@ -13,35 +15,42 @@ public class Book {
     private String picture;
     private String title;
     private String author; 
-    private boolean available;
-    private int yearOfPublication;
+    private Date publication;
     private String language;
     private String summary;
     private String amazonlink;
-    private String bookID = java.util.UUID.randomUUID().toString();
+    private String isbn;
 
     public Book() {
        
     }
-    
-    public Book(String picture, String title, String author, boolean available, 
-            String language, String summary, int yearOfPublication, String amazon) {
+
+    public Book(String picture, String title, String author, Date publication, String language, String summary, String amazonlink, String isbn) {
         this.picture = picture;
         this.title = title;
         this.author = author;
-        this.available = available;
+        this.publication = publication;
         this.language = language;
         this.summary = summary;
-        this.yearOfPublication = yearOfPublication;
-        this.amazonlink = amazon;
+        this.amazonlink = amazonlink;
+        this.isbn = isbn;
     }
 
-    public String getSummary() {
-        return summary;
+    public Book(String title, Date publication, String language, String isbn) {
+        this.title = title;
+        this.publication = publication;
+        this.language = language;
+        this.isbn = isbn;
     }
 
-    public void setSummary(String summary) {
+    public Book(String picture, String title, Date publication, String language, String summary, String amazonlink, String isbn) {
+        this.picture = picture;
+        this.title = title;
+        this.publication = publication;
+        this.language = language;
         this.summary = summary;
+        this.amazonlink = amazonlink;
+        this.isbn = isbn;
     }
 
     public String getPicture() {
@@ -68,12 +77,12 @@ public class Book {
         this.author = author;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public Date getPublication() {
+        return publication;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setPublication(Date publication) {
+        this.publication = publication;
     }
 
     public String getLanguage() {
@@ -84,28 +93,28 @@ public class Book {
         this.language = language;
     }
 
-    public String getBookID() {
-        return bookID;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setBookID(String bookID) {
-        this.bookID = bookID;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
-    public int getYearOfPublication() {
-        return yearOfPublication;
-    }
-
-    public void setYearOfPublication(int yearOfPublication) {
-        this.yearOfPublication = yearOfPublication;
-    }
-   
     public String getAmazonlink() {
         return amazonlink;
     }
 
     public void setAmazonlink(String amazonlink) {
         this.amazonlink = amazonlink;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
     
 }

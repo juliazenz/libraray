@@ -55,16 +55,16 @@
                                 String action = (b.isAvailable()) ? "lend out" : "reserve";%>
                 <div class='row'>
                     <div id='pic'>
-                        <a href='DetailServlet?bookID=<%=b.getBookID()%>'>
+                        <a href='DetailServlet?isbn=<%=b.getIsbn()%>'>
                             <img id='imgBook' src='res/<%=b.getPicture()%>' alt="<%=b.getTitle()%>"></a>
                     </div>
-                    <div id='book'><p><a href='DetailServlet?bookID=<%=b.getBookID()%>' class='bookTitle'><%=b.getTitle()%></a>
+                    <div id='book'><p><a href='DetailServlet?isbn=<%=b.getIsbn()%>' class='bookTitle'><%=b.getTitle()%></a>
                             (<%=b.getAuthor()%>)</p><p>
                             <%=b.getLanguage()%></p></div>
 
-                    <div id='info'><a href='DetailServlet?bookID=<%=b.getBookID()%>'>more Information...</a></div>
+                            <div id='info'><a href='DetailServlet?isbn=<%=b.getIsbn()%>'>more Information...</a></div>
                     <div id='lend'>
-                        <a href='DetailServlet?bookID=<%=b.getBookID()%>&action=<%=action%>'><input type='button' value='<%=action%>'/></a>
+                        <a href='DetailServlet?isbn=<%=b.getIsbn()%>&action=<%=action%>'><input type='button' value='<%=action%>'/></a>
                     </div>
                 </div>
                 <% }

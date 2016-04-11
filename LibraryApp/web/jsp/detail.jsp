@@ -22,11 +22,11 @@
         
         <jsp:include page="/css/cssmenu/index.html"></jsp:include>
         
-        <% String bookID = request.getParameter("bookID");
+        <% String isbn = request.getParameter("isbn");
             LinkedList<Book> booklist = (LinkedList<Book>) request.getServletContext().getAttribute("bookList");
             if (booklist.size() > 0) {
                 for (Book b : booklist) {
-                    if (b.getBookID().equals(bookID)) {
+                    if (b.getIsbn().equals(isbn)) {
                         book = b;
                     }
                 }
@@ -65,7 +65,7 @@
                 <% String action = (book.isAvailable()) ? "lend out" : "reserve";%>
                 <form action="DetailServlet">
                     <img id="imgBook" src='res/<%=book.getPicture()%>'/>
-                   <a href='DetailServlet?bookID=<%=book.getBookID()%>&action=<%=action%>'><input type='button' value='<%=action%>'/></a>
+                   <a href='DetailServlet?isbn=<%=book.getIsbn()%>&action=<%=action%>'><input type='button' value='<%=action%>'/></a>
                 </form>
             </div>
         </div>
