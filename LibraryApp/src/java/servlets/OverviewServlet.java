@@ -76,7 +76,7 @@ public class OverviewServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(config); //To change body of generated methods, choose Tools | Templates.
+        super.init(config); 
         try {
             loadData();
             dba = DBAccess.getInstance();

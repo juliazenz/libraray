@@ -119,7 +119,7 @@
   }
 }
 /* Make sure they show even if hidden in mobile view by JS */
-@media (min-width: 600px) {
+@media (min-width: 640px) {
   #cssmenu > ul > li.collapsed {
     display: inline-block !important;
     *display: inline;

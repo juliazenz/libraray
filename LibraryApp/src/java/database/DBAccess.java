@@ -44,7 +44,7 @@ public class DBAccess {
 
     // Prepeard-Statements for Inserting new Values
     private final HashMap<Connection, PreparedStatement> insertBookStmts = new HashMap<>();
-    private final String insertBookSqlStr = "INSERT INTO Book(title, "
+    private final String insertBookSqlStr = "INSERT INTO Book(title, isbn, "
             + "publication, summary, language, picture, linkToAmazon) "
             + "VALUES(?,?, ?, ?, ?, ?)";
 
@@ -60,52 +60,59 @@ public class DBAccess {
         LinkedList<Book> buecherListe = new LinkedList<>();
         Connection con = conPool.getConnection();
         Statement stat = con.createStatement();
-        String sqlString = "SELECT title, publication, summary, language, "
+        String sqlString = "SELECT title, publication, summary, language, p.p_name"
                 + "picture, linkToAmazon, b.isbn, a.firstname, a.lastname "
                 + "FROM BookAuthor ba INNER JOIN Book b ON(b.isbn = ba.isbn)"
-                + "INNER JOIN Author a ON(ba.author_id = a.author_id);";
+                + "INNER JOIN Author a ON(ba.author_id = a.author_id)"
+                + "INNER JOIN Publisher p ON (b.publisher_id = p.publisher_id);";
         ResultSet rs = stat.executeQuery(sqlString);
         while (rs.next()) {
             String titel = rs.getString("title");
             String isbn = rs.getString("isbn");
             Date publication = rs.getDate("publication");
+            String publisher = rs.getString("p_name");
             String summary = rs.getString("summary");
             String language = rs.getString("language");
             String picture = rs.getString("picture");
             String linkToAmazon = rs.getString("linkToAmazon");
             String author = rs.getString("firstname") + " " + rs.getString("lastname");
-            buecherListe.add(new Book(picture, titel, author, publication,
-                    language, summary, linkToAmazon, isbn));
+            buecherListe.add(new Book(isbn, titel, author, publisher, publication, summary, language, author, picture));
         }
         conPool.releaseConnection(con);
         return buecherListe;
     }
 
+    // 0          ; 1   ; 2     ; 3      ; 4         ; 5           ; 6       ; 7        ; 8    ; 9       ; 10
+    // EXEMPLAR_ID;ISBN ; TITEL ; AUTHOR ; PUBLISHER ; PUBLICATION ; SUMMARY ; LANGUAGE ; LINK ; PICTURE ; AVAILABLE
     public LinkedList<Book> getBookFromList() throws FileNotFoundException, IOException {
         LinkedList<Book> buecherListe = new LinkedList<>();
-        String pfadListe = "C:\\Users\\Nico\\Google Drive\\4. Jahrgang\\POS\\library\\LibraryApp\\web\\res\\Book_list_20160311.csv";
+        String pfadListe = System.getProperty("user.dir") + File.separator + "web"
+                + File.separator + "res" + File.separator + "Book_testdaten.csv";
 
         FileReader fr = new FileReader(pfadListe);
         BufferedReader br = new BufferedReader(fr);
         String line = "";
-        
+
+        br.readLine();
         while ((line = br.readLine()) != null) {
             String[] parts = line.split(";");
-            
-            String titel = parts[0];
-            String isbn = "";
-            Date publication = Date.valueOf(LocalDate.now());
-                  
-            String summary = parts[4];
-            String language = parts[5];
-            String picture = parts[6];
-            String linkToAmazon = parts[7];
-            String author = parts[2];
-            buecherListe.add(new Book(picture, titel, author, publication,
-                    language, summary, linkToAmazon, isbn));
 
+            int exemplarID = Integer.parseInt(parts[0]);
+            String isbn = parts[1];
+            String titel = parts[2];
+            String author = parts[3];
+            String publisher = parts[4];
+            Date publication = Date.valueOf(parts[5]);
+
+            String summary = parts[6];
+            String language = parts[7];
+            String linkToAmazon = parts[8];
+            String picture = parts[9];
+            boolean available = parts[10].equals("T");
+            
+            buecherListe.add(new Book(exemplarID, isbn, titel, author, publisher, publication, summary, language, linkToAmazon, picture, available));
         }
-        
+
         br.close();
         fr.close();
 
@@ -180,12 +187,12 @@ public class DBAccess {
             insertBookStmts.put(conn, insert);
         }
         insert.setString(1, book.getTitle());
-        //insert.setString(2, book.getIsbn());
-        insert.setDate(2, (Date) book.getPublication());
-        insert.setString(3, book.getSummary());
-        insert.setString(4, book.getLanguage());
-        insert.setString(5, book.getPicture());
-        insert.setString(6, book.getAmazonlink());
+        insert.setString(2, book.getIsbn());
+        insert.setDate(3, (Date) book.getPublication());
+        insert.setString(4, book.getSummary());
+        insert.setString(5, book.getLanguage());
+        insert.setString(6, book.getPicture());
+        insert.setString(7, book.getAmazonlink());
         insert.executeUpdate();
 
 //        PreparedStatement insertBA = insertBookAuthorStmts.get(conn);
@@ -196,7 +203,6 @@ public class DBAccess {
 //        // insertBA.setInt(1, ????)
 //        insertBA.setString(1, book.getIsbn());
 //        insertBA.executeUpdate();
-
         PreparedStatement insertAuthor = insertAuthorStmts.get(conn);
         if (insertAuthor == null) {
             insertAuthor = conn.prepareStatement(insertAuthorSqlStr);
@@ -218,7 +224,7 @@ public class DBAccess {
 //            dba.insertBook(bNew);
 
             LinkedList<Book> list = dba.getBookFromList();
-            
+
             for (Book book : list) {
                 System.out.println(book);
                 dba.insertBook(book);

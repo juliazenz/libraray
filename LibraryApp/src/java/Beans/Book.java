@@ -8,57 +8,70 @@ package Beans;
 import java.util.Date;
 
 /**
- *
+ * 
  * @author pruta_000
  */
+
+ // EXEMPLAR_ID ; ISBN ; TITEL ; AUTHOR ; PUBLISHER ; PUBLICATION ; SUMMARY ; LANGUAGE ; LINK ; PICTURE ; AVAILABLE
 public class Book {
-    private String picture;
+
+    private int exemplar_id; 
+    private String isbn;
     private String title;
     private String author; 
+    private String publisher;
     private Date publication;
-    private String language;
     private String summary;
+    private String language;
     private String amazonlink;
-    private String isbn;
-
+    private String picture;
+    private boolean available;
+    
     public Book() {
        
     }
 
-    public Book(String picture, String title, String author, Date publication, String language, String summary, String amazonlink, String isbn) {
-        this.picture = picture;
+    public Book(int exemplar_id, String isbn, String title, String author, String publisher, Date publication, String summary, String language, String amazonlink, String picture, boolean available) {
+        this.exemplar_id = exemplar_id;
+        this.isbn = isbn;
         this.title = title;
         this.author = author;
+        this.publisher = publisher;
         this.publication = publication;
-        this.language = language;
         this.summary = summary;
+        this.language = language;
         this.amazonlink = amazonlink;
-        this.isbn = isbn;
-    }
-
-    public Book(String title, Date publication, String language, String isbn) {
-        this.title = title;
-        this.publication = publication;
-        this.language = language;
-        this.isbn = isbn;
-    }
-
-    public Book(String picture, String title, Date publication, String language, String summary, String amazonlink, String isbn) {
         this.picture = picture;
+        this.available = available;
+    }
+
+    public Book(String isbn, String title, String author, String publisher, Date publication, String summary, String language, String amazonlink, String picture) {
+        this.isbn = isbn;
         this.title = title;
+        this.author = author;
+        this.publisher = publisher;
         this.publication = publication;
-        this.language = language;
         this.summary = summary;
+        this.language = language;
         this.amazonlink = amazonlink;
-        this.isbn = isbn;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+
+    public int getExemplar_id() {
+        return exemplar_id;
+    }
+
+    public void setExemplar_id(int exemplar_id) {
+        this.exemplar_id = exemplar_id;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getTitle() {
@@ -77,20 +90,20 @@ public class Book {
         this.author = author;
     }
 
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
     public Date getPublication() {
         return publication;
     }
 
     public void setPublication(Date publication) {
         this.publication = publication;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     public String getSummary() {
@@ -101,6 +114,14 @@ public class Book {
         this.summary = summary;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
     public String getAmazonlink() {
         return amazonlink;
     }
@@ -109,12 +130,22 @@ public class Book {
         this.amazonlink = amazonlink;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    
     
 }
