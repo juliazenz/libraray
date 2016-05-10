@@ -51,7 +51,7 @@
                         <tr>
                             <td><%=book.getSummary()%></td>
                         </tr>
-                        <tr><td> <p><i><b>Status:</b></i><%=book.isAvailable() ? " available" : " not available"%></p></td></tr>
+                        <tr><td> <p><i><b>Status:</b></i><%=(book.getAvailable() > 0) ? " available" : " not available"%></p></td></tr>
                         <tr>
                             <td><a href=<%=book.getAmazonlink()%>>To Amazon</a></td>
                         </tr>
@@ -62,7 +62,7 @@
                 </table>
             </div>
             <div id="rightDetail"> 
-                <% String action = (book.isAvailable()) ? "lend out" : "reserve";%>
+                <% String action = (book.getAvailable() > 0) ? "lend out" : "reserve";%>
                 <form action="DetailServlet">
                     <img id="imgBook" src='res/<%=book.getPicture()%>'/>
                    <a href='DetailServlet?isbn=<%=book.getIsbn()%>&action=<%=action%>'><input type='button' value='<%=action%>'/></a>

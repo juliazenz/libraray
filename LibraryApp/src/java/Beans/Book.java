@@ -12,10 +12,9 @@ import java.util.Date;
  * @author pruta_000
  */
 
- // EXEMPLAR_ID ; ISBN ; TITEL ; AUTHOR ; PUBLISHER ; PUBLICATION ; SUMMARY ; LANGUAGE ; LINK ; PICTURE ; AVAILABLE
+ // ISBN ; TITEL ; AUTHOR ; PUBLISHER ; PUBLICATION ; SUMMARY ; LANGUAGE ; LINK ; PICTURE ; AVAILABLE
 public class Book {
 
-    private int exemplar_id; 
     private String isbn;
     private String title;
     private String author; 
@@ -25,14 +24,14 @@ public class Book {
     private String language;
     private String amazonlink;
     private String picture;
-    private boolean available;
+    private int amount;
+    private int available;
     
     public Book() {
        
     }
 
-    public Book(int exemplar_id, String isbn, String title, String author, String publisher, Date publication, String summary, String language, String amazonlink, String picture, boolean available) {
-        this.exemplar_id = exemplar_id;
+    public Book(String isbn, String title, String author, String publisher, Date publication, String summary, String language, String amazonlink, String picture, int amount, int available) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
@@ -42,28 +41,8 @@ public class Book {
         this.language = language;
         this.amazonlink = amazonlink;
         this.picture = picture;
+        this.amount = amount;
         this.available = available;
-    }
-
-    public Book(String isbn, String title, String author, String publisher, Date publication, String summary, String language, String amazonlink, String picture) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.publication = publication;
-        this.summary = summary;
-        this.language = language;
-        this.amazonlink = amazonlink;
-        this.picture = picture;
-    }
-
-
-    public int getExemplar_id() {
-        return exemplar_id;
-    }
-
-    public void setExemplar_id(int exemplar_id) {
-        this.exemplar_id = exemplar_id;
     }
 
     public String getIsbn() {
@@ -138,14 +117,22 @@ public class Book {
         this.picture = picture;
     }
 
-    public boolean isAvailable() {
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getAvailable() {
         return available;
     }
 
-    public void setAvailable(boolean available) {
+    public void setAvailable(int available) {
         this.available = available;
     }
 
     
-    
+
 }

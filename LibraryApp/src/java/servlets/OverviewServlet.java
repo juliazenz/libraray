@@ -76,12 +76,23 @@ public class OverviewServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(config); 
+        super.init(config);
         try {
-            loadData();
+            //  loadData();
             dba = DBAccess.getInstance();
-            bookList = dba.getAllBooks();
-
+            bookList = dba.getBookFromList("C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\Projekt\\library\\LibraryApp\\web\\res\\Book_testdaten.csv");
+            
+            String path = "C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\Projekt\\library\\LibraryApp\\web\\res\\Mitarbeiter_Liste_20151119.txt";
+            FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                empList.add(line);
+            }
+            this.getServletContext().setAttribute("bookList", bookList);
+            this.getServletContext().setAttribute("filterList", bookList);
+            this.getServletContext().setAttribute("empList", empList);
+            br.close();
         } catch (IOException ex) {
             Logger.getLogger(OverviewServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -129,34 +140,25 @@ public class OverviewServlet extends HttpServlet {
     }// </editor-fold>
 
     public void loadData() throws FileNotFoundException, IOException {
-        String path = this.getServletContext().getRealPath("/res" + File.separator + "buchdaten.csv");
-        FileReader fr = new FileReader(path);
-        BufferedReader br = new BufferedReader(fr);
-        String line = "";
-        String feld[] = null;
-        boolean available;
-        while ((line = br.readLine()) != null) {
-            feld = line.split(";");
-            //String picture, String title, String author, boolean available
-            available = false;
-            if (feld[3].equals("true")) {
-                available = true;
-            }
-
-            Book b = new Book();
-            bookList.add(b);
-        }
-        br.close();
+//        String path = this.getServletContext().getRealPath("/res" + File.separator + "Book_testdaten.csv");
+//        FileReader fr = new FileReader(path);
+//        BufferedReader br = new BufferedReader(fr);
+//        String line = "";
+//        String feld[] = null;
+//        boolean available;
+//        while ((line = br.readLine()) != null) {
+//            feld = line.split(";");
+//            //String picture, String title, String author, boolean available
+//            available = false;
+//            if (feld[3].equals("true")) {
+//                available = true;
+//            }
+//
+//            Book b = new Book();
+//            bookList.add(b);
+//        }
+//        br.close();
 
         // Employees einlesen
-        path = this.getServletContext().getRealPath("/res" + File.separator + "Mitarbeiter_Liste_20151119.txt");
-        fr = new FileReader(path);
-        br = new BufferedReader(fr);
-        while ((line = br.readLine()) != null) {
-            empList.add(line);
-        }
-        this.getServletContext().setAttribute("bookList", bookList);
-        this.getServletContext().setAttribute("empList", empList);
-
     }
 }

@@ -29,17 +29,16 @@
                             <td><input type="text" name="title"/></td>
                         </tr>
                         <tr>
+                            <td>ISBN:</td>
+                            <td><input type="text" name="isbn"/></td>
+                        </tr>
+                        <tr>
                             <td>Author(s):</td>
                             <td><input type="text" name="author"/></td>
                         </tr>
                         <tr>
-                            <td>Year of Publication:</td>
-                            <td><select name="year">
-                                <% for (int i = 0; i < 50; i++) {
-                                        out.println("<option>" + LocalDate.now().minusYears(i).getYear() + "</option>");
-                                    }%>
-                            </select>
-                        </td>
+                            <td>Date of Publication:</td>
+                            <td><input type="text" name="publication" value="DD.MM.YYYY" /></td>
                     </tr>
                     <tr>
                         <td>Language:</td>
@@ -57,6 +56,10 @@
                     <tr>
                         <td>Picture:</td>
                         <td><input type="file" name="picture" accept="image/*"/></td>
+                    </tr>
+                    <tr>
+                        <td>Number of Books:</td>
+                        <td><input type="text" name="exemplare"/></td>
                     </tr>
                     <tr>
 

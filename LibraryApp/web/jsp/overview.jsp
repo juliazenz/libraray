@@ -52,7 +52,7 @@
                         }
                         if (filteredList != null) {
                             for (Book b : filteredList) {
-                                String action = (b.isAvailable()) ? "lend out" : "reserve";%>
+                                String action = (b.getAvailable() > 0) ? "lend out" : "reserve";%>
                 <div class='row'>
                     <div id='pic'>
                         <a href='DetailServlet?isbn=<%=b.getIsbn()%>'>

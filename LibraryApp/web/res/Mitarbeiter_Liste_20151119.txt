@@ -1,4 +1,3 @@
-Lastname, Firstname
 Ajdukovic, Zarko
 Amtmann, Heribert
 Antes-Klobucar, Ivan

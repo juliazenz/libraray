@@ -7,6 +7,9 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,7 +68,17 @@ public class AddBookServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        if(request != null){
+            String title = request.getParameter("title");
+            String isbn = request.getParameter("isbn");
+            String author = request.getParameter("author");
+            LocalDate publication = LocalDate.parse(request.getParameter("publication"), DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+            String language = request.getParameter("language");
+            String amazonlink = request.getParameter("amazonlink");
+            String summary = request.getParameter("summary");
+            String picture = request.getParameter("picture");
+            int anzBooks = Integer.parseInt(request.getParameter("exemplare"));
+        }
         
     }
 

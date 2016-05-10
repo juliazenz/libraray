@@ -31,7 +31,7 @@
             LinkedList<Book> booklist = (LinkedList<Book>) application.getAttribute("bookList");
             if (booklist.size() > 0) {
                 for (Book b : booklist) {
-                    if (b.getBookID().equals(bookID)) {
+                    if (b.getIsbn().equals(bookID)) {
                         book = b;
                     }
                 }
