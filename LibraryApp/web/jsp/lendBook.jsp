@@ -26,20 +26,20 @@
 
         <jsp:include page="/css/cssmenu/index.html"></jsp:include>
 
-        <% String bookID = request.getParameter("bookID");
+        <% String isbn = request.getParameter("isbn");
             empList = (LinkedList<String>) application.getAttribute("empList");
             LinkedList<Book> booklist = (LinkedList<Book>) application.getAttribute("bookList");
             if (booklist.size() > 0) {
                 for (Book b : booklist) {
-                    if (b.getIsbn().equals(bookID)) {
+                    if (b.getIsbn().equals(isbn)) {
                         book = b;
                     }
                 }
             }
         %>
 
-       <!-- <h1><% booklist.size();%></h1> -->
     <center>
+        <form action="DetailServlet" method="POST">
         <div id="container">
             <h1 style='font-size:16pt;'>Lend out Book <%=book.getTitle()%></h1>
             <table border="0">
@@ -67,6 +67,7 @@
             </table><br><br>
             <input type='button' value="lend out" onclick="showLend(this)">
         </div>
+        </form>
     </center>
 </body>
 </html>

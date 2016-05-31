@@ -7,6 +7,8 @@ package database;
 
 import Beans.Book;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Locale;
 
 /**
  * Für Zugriff auf Datenbank
@@ -53,7 +56,6 @@ public class DBAccess {
         BufferedReader br = new BufferedReader(fr);
         String line = "";
 
-        br.readLine();
         while ((line = br.readLine()) != null) {
             String[] parts = line.split(";");
 
@@ -62,19 +64,18 @@ public class DBAccess {
             String author = parts[2];
             String publisher = parts[3];
 
-            Date publication;
-            LocalDate d = LocalDate.parse(parts[4], DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-            publication = new Date(d.toEpochDay());
+            Date publication = new Date(LocalDate.parse(parts[4], 
+                    DateTimeFormatter.ofPattern("dd.MM.yyyy")).toEpochDay());
             String summary = parts[5];
             String language = parts[6];
             String linkToAmazon = parts[7];
-            String picture = "NULL";
+            String picture = parts[8];
             int amount = Integer.parseInt(parts[9]);
             int available = Integer.parseInt(parts[10]);      
             
             Book b = new Book(isbn, titel, author, publisher, publication, summary, language, linkToAmazon, picture, amount, available);
             buecherListe.add(b);
-//           insertBook(b);
+           insertBook(b);
         }
 
         br.close();
@@ -88,14 +89,15 @@ public class DBAccess {
     // Prepeard-Statements for Inserting new Values
     private final HashMap<Connection, PreparedStatement> insertBookStmts = new HashMap<>();
     private final String insertBookSqlStr = "INSERT INTO Book(isbn, titel, author, "
-            + "publication, summary, language, linkToAmazon, "
+            + "publication, summary, language, picture, linkToAmazon, publisher"
             + "amount, available) "
-            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     
     public void insertBook(Book book) throws Exception {
         Connection conn = conPool.getConnection();
         PreparedStatement insert = insertBookStmts.get(conn);
+        FileInputStream fis = null;
         if (insert == null) {
             insert = conn.prepareStatement(insertBookSqlStr);
             insertBookStmts.put(conn, insert);
@@ -106,11 +108,13 @@ public class DBAccess {
         insert.setDate(4, (Date) book.getPublication());
         insert.setString(5, book.getSummary());
         insert.setString(6, book.getLanguage());
-      //  insert.setBlob(7, null);
-        insert.setString(7, book.getAmazonlink());
-      //  insert.setInt(9, null);
-        insert.setInt(8, book.getAmount());
-        insert.setInt(9, book.getAvailable());
+        File file = new File("C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\Projekt\\library\\LibraryApp\\web\\res"+File.separator+book.getPicture());
+        fis = new FileInputStream(file);
+        insert.setBinaryStream(7, fis, file.length());
+        insert.setString(8, book.getAmazonlink());
+        insert.setString(9, book.getPublisher());
+        insert.setInt(10, book.getAmount());
+        insert.setInt(11, book.getAvailable());
         insert.executeUpdate();
 
         conPool.releaseConnection(conn);

@@ -35,13 +35,13 @@ h1 {
 }
 
 #container{
-	width:960px;
+	width:90%;
 	margin:0px auto;
 }
 
 .row{
-	width:960px;
-	height:100px;
+	width:100%;
+	height:20%;
 	margin:2px auto;
 	border-style:solid;
 	border-color:black;
@@ -92,7 +92,7 @@ h1 {
 }
 
 #imgBook{
-	height:98px;
+	height:200px;
         width:auto;
 }
 
@@ -104,6 +104,10 @@ h1 {
 input {
     height: auto;
 }
+
+#error{
+    color:red;
+}
 @media screen and (max-width:959px){
     #container{
 		width:100%;
@@ -111,22 +115,22 @@ input {
 
 	.row{
 		width:100%;
-		height:100px;
+		height:20%;
 	}
 	
 	#headLeft{
 		width:30%;
-		height:120px;
+		height:30%;
 	}
 
 	#headCenter{
 		width:40%;
-		height:120px;
+		height:30%;
 	}
 
 	#headRight{
 		width:30%;
-		height:120px;
+		height:30%;
 	}
 
 	#pic{
@@ -146,7 +150,7 @@ input {
 	}
 	
 	#imgBook{
-		height:98px;
+		height:198px;
                 max-width:100%;
                 width:auto;
 	}
@@ -162,7 +166,7 @@ input {
         }
 	.row{
 		width:100%;
-		height:160px;
+		height:40%;
 	}
 	
 	#headLeft{

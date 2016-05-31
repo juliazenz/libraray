@@ -37,6 +37,10 @@
                             <td><input type="text" name="author"/></td>
                         </tr>
                         <tr>
+                            <td>Publisher:</td>
+                            <td><input type="text" name="publisher"/></td>
+                        </tr>
+                        <tr>
                             <td>Date of Publication:</td>
                             <td><input type="text" name="publication" value="DD.MM.YYYY" /></td>
                     </tr>
@@ -62,12 +66,17 @@
                         <td><input type="text" name="exemplare"/></td>
                     </tr>
                     <tr>
-
+                        
                         <td><input type="reset" value="cancle" name="eve"/></td>
                         <td><input type="submit" value="add Book" name="eve"/></td></tr>
-                    <tr><td><a href='OverviewServlet'> Back to Overview</a></td></tr>
+                    <tr>
+                        <td><a href='OverviewServlet'> Back to Overview</a></td>
+                    </tr>
                 </tbody>
             </table>
+                <% if(request.getAttribute("error") != null){ %>
+                    <p id="error"><%=request.getAttribute("error")%></p>
+                    <% } %>
         </form>
     </center>
 </body>
