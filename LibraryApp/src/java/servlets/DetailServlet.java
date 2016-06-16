@@ -98,6 +98,8 @@ public class DetailServlet extends HttpServlet {
             String isbn = request.getParameter("book");
                 String nameEMP = request.getParameter("nameEMP");
         }
+        RequestDispatcher rd = request.getRequestDispatcher("/jsp/overview.jsp");
+                rd.forward(request, response);
     }
 
     /**
