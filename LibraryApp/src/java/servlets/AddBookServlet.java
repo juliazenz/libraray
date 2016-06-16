@@ -9,9 +9,12 @@ import Beans.Book;
 import database.DBAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -28,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AddBookServlet extends HttpServlet {
 
     private DBAccess dba;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,10 +42,34 @@ public class AddBookServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
+            
+              LinkedList<Book> booklist = (LinkedList<Book>) request.getServletContext().getAttribute("bookList");
+
+            try {
+                String isbn = request.getParameter("isbn");
+                String title = request.getParameter("title");
+                String author = request.getParameter("author");
+                String publisher = request.getParameter("publisher");
+                String publicationStr = request.getParameter("publication");
+                Date publication = (Date) sdf.parse(publicationStr);
+                String summary = request.getParameter("summary");
+                String language = request.getParameter("language");
+                String amazonLink = request.getParameter("amazonLink");
+                String picture = request.getParameter("picture");
+                int amount = Integer.parseInt(request.getParameter("amount"));
+                Book b = new Book(isbn, title, author, publisher, (java.sql.Date) publication, summary, language, amazonLink, picture, amount, amount);
+                booklist.add(b);
+                for (Book book : booklist) {
+                    System.out.println(book.getTitle());
+                }
+
+            } catch (ParseException ex) {
+                Logger.getLogger(AddBookServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
