@@ -41,7 +41,12 @@ public class DBConnectionPool implements DBConfig{
             if(num_connections >= MAX_CONNECTIONS){ // alle Connections sind schon vergeben
                 throw new Exception("Maximum Number of Users reached - try again later");
             }
+            System.out.println("1");
+            System.out.println(DB_URL+DB_NAME);
+            System.out.println(DB_USER);
+            System.out.println(DB_PASSWD);
             Connection con = DriverManager.getConnection(DB_URL+DB_NAME, DB_USER, DB_PASSWD);
+            System.out.println("2");
             num_connections ++;
             return con;
         }

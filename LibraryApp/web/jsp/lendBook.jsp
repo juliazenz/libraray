@@ -39,9 +39,10 @@
         %>
 
     <center>
-        <form action="DetailServlet" method="POST">
+        <form action="DetailServlet" method="POST" onsubmit="showLend(this)">
         <div id="container">
             <h1 style='font-size:16pt;'>Lend out Book <%=book.getTitle()%></h1>
+            <input type="hidden" name="book" value="<%=book.getIsbn()%>"/>
             <table border="0">
                 <tbody>
 
@@ -49,7 +50,7 @@
                         <td><h3>from <%=book.getAuthor()%> (Author)</h3></td>
                     </tr>
                     <tr><td><b>Date of Reservation: </b>
-                            <%=LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)%></td></tr>
+                            <input type="text" name="dateOfLend" value="<%=LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)%>" /></td></tr>
                     <tr>
                         <td><b>Deadline: </b>
                             <input type="text" name="deadline" value="<%=LocalDate.now().plusMonths(3).format(DateTimeFormatter.ISO_LOCAL_DATE)%>"/></td>
@@ -65,7 +66,7 @@
                     </tr>
                 </tbody>
             </table><br><br>
-            <input type='button' value="lend out" onclick="showLend(this)">
+            <input type='submit' value="lend out">
         </div>
         </form>
     </center>

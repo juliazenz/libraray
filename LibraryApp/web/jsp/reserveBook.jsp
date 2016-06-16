@@ -38,16 +38,17 @@
             }
         %>
     <center>
-        <form action="DetailServlet" method="POST">
+        <form action="DetailServlet" method="POST" onsubmit="showReserve(this)">
         <div id="container">
                 <h1 style='font-size:16pt;'>Reserve Book "<%=book.getTitle()%>"</h1>
+                <input type="hidden" name="book" value="<%=book.getIsbn()%>"/>
                 <table border="0">
                     <tbody>
                         <tr>
                             <td><h3>from <%=book.getAuthor()%> (Author)</h3></td>
                         </tr>
                         <tr><td><b>Date of Reservation: </b>
-                                <%=LocalDate.now().format(DateTimeFormatter.ofPattern("DD.MM.YYYY"))%></td></tr>
+                                <input type="text" name="dateOfReservation" value="<%=LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)%>" /></td></tr>
                         <tr>
                             <td></td>
                         </tr>
@@ -62,7 +63,7 @@
                         </tr>
                     </tbody>
                 </table><br><br>
-                <input type='button' value="reserve" onclick="showReserve(this)">
+                <input type='submit' value="reserve">
         </div>
         </form>
     </center>

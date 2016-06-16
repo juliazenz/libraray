@@ -44,6 +44,8 @@ public class Book {
         this.amount = amount;
         this.available = available;
     }
+    
+    
 
     public String getIsbn() {
         return isbn;

@@ -11,9 +11,9 @@ package database;
  */
 public interface DBConfig {
     
-    public static final String DB_NAME = "u33308db9";
-    public static final String DB_USER = "u33308db9";
-    public static final String DB_PASSWD = "password!1";
-    public static final String DB_URL = "jdbc:mysql://e32004-mysql.services.easyname.eu/";
-    public static final String DB_DRIVER = "org.gjt.mm.mysql.Driver";
+    public static final String DB_NAME = "infonova_libary";
+    public static final String DB_USER = "root";
+    public static final String DB_PASSWD = "";
+    public static final String DB_URL = "jdbc:mysql://localhost/";
+    public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 }

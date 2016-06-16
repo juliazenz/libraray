@@ -16,8 +16,6 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -35,6 +33,7 @@ public class DBAccess {
     // class implementet as Singleton
     private static DBAccess theInstance = null;
     private DBConnectionPool conPool = null;
+    private String path;
 
     public static DBAccess getInstance() throws ClassNotFoundException {
         if (theInstance == null) {
@@ -47,10 +46,10 @@ public class DBAccess {
         conPool = DBConnectionPool.getInstance();
     }
 
-
     // 0    ; 1     ; 2      ; 3         ; 4           ; 5       ; 6        ; 7    ; 8       ; 9      ; 10     
     // ISBN ; TITEL ; AUTHOR ; PUBLISHER ; PUBLICATION ; SUMMARY ; LANGUAGE ; LINK ; PICTURE ; AMOUNT ; AVAILABLE
     public LinkedList<Book> getBookFromList(String pfad) throws FileNotFoundException, IOException, Exception {
+        path = pfad;
         LinkedList<Book> buecherListe = new LinkedList<>();
         FileReader fr = new FileReader(pfad);
         BufferedReader br = new BufferedReader(fr);
@@ -64,18 +63,23 @@ public class DBAccess {
             String author = parts[2];
             String publisher = parts[3];
 
-            Date publication = new Date(LocalDate.parse(parts[4], 
+            Date publication = new Date(LocalDate.parse(parts[4],
                     DateTimeFormatter.ofPattern("dd.MM.yyyy")).toEpochDay());
             String summary = parts[5];
             String language = parts[6];
             String linkToAmazon = parts[7];
             String picture = parts[8];
             int amount = Integer.parseInt(parts[9]);
-            int available = Integer.parseInt(parts[10]);      
-            
+            int available = Integer.parseInt(parts[10]);
+
             Book b = new Book(isbn, titel, author, publisher, publication, summary, language, linkToAmazon, picture, amount, available);
             buecherListe.add(b);
-           insertBook(b);
+
+            //insertBook(b);
+        }
+        for (Book book : buecherListe) {
+            System.out.println("Titel:" + book.getTitle());
+
         }
 
         br.close();
@@ -83,19 +87,20 @@ public class DBAccess {
 
         return buecherListe;
     }
-  
-    // ISBN ; TITEL ; AUTHOR ; PUBLISHER ; PUBLICATION ; SUMMARY ; LANGUAGE ; LINK ; PICTURE ; AMOUNT ; AVAILABLE
     
+
+    // ISBN ; TITEL ; AUTHOR ; PUBLISHER ; PUBLICATION ; SUMMARY ; LANGUAGE ; LINK ; PICTURE ; AMOUNT ; AVAILABLE
     // Prepeard-Statements for Inserting new Values
     private final HashMap<Connection, PreparedStatement> insertBookStmts = new HashMap<>();
-    private final String insertBookSqlStr = "INSERT INTO Book(isbn, titel, author, "
-            + "publication, summary, language, picture, linkToAmazon, publisher"
+    private final String insertBookSqlStr = "INSERT INTO book(ISBN, titel, author,"
+            + "publication, summary, language, picture, amazonlink, publisher"
             + "amount, available) "
             + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    
     public void insertBook(Book book) throws Exception {
+        System.out.println("insert book");
         Connection conn = conPool.getConnection();
+        System.out.println("conn: "+conn);
         PreparedStatement insert = insertBookStmts.get(conn);
         FileInputStream fis = null;
         if (insert == null) {
@@ -108,7 +113,7 @@ public class DBAccess {
         insert.setDate(4, (Date) book.getPublication());
         insert.setString(5, book.getSummary());
         insert.setString(6, book.getLanguage());
-        File file = new File("C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\Projekt\\library\\LibraryApp\\web\\res"+File.separator+book.getPicture());
+        File file = new File("C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\library\\LibraryApp\\web\\res" + File.separator + book.getPicture());
         fis = new FileInputStream(file);
         insert.setBinaryStream(7, fis, file.length());
         insert.setString(8, book.getAmazonlink());
@@ -119,28 +124,31 @@ public class DBAccess {
 
         conPool.releaseConnection(conn);
     }
+    
+    public void lendBook(String isbn, String nameEMP){
+        
+    }
 
     public static void main(String[] args) {
 
         try {
             DBAccess dba = DBAccess.getInstance();
-//            Book bNew = new Book("Hi", "01234", 12.3, );
+//            Book bNew = new Book();
 //            dba.insertBook(bNew);
 
-            LinkedList<Book> list = dba.getBookFromList("");
+            LinkedList<Book> list = dba.getBookFromList("C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\library\\LibraryApp\\web\\res\\Book_testdaten.csv");
 
             for (Book book : list) {
                 System.out.println(book);
-                dba.insertBook(book);
+//                dba.insertBook(book);
             }
 
 //            LinkedList<Book> liste = dba.getAllBooks();
 //            for (Book book : liste) {
 //                System.out.println(book);
 //            }
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex.toString());
         } catch (Exception ex) {
+            ex.printStackTrace();
             System.out.println(ex.toString());
         }
 

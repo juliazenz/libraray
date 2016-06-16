@@ -6,11 +6,14 @@
 package servlets;
 
 import Beans.Book;
+import database.DBAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -81,7 +84,20 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        if(request.getParameter("dateOfLend") != null){
+            try {
+                String isbn = request.getParameter("book");
+                String nameEMP = request.getParameter("nameEMP");
+                DBAccess dba = DBAccess.getInstance();
+                dba.lendBook(isbn, nameEMP);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DetailServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(request.getParameter("dateOfReservation") != null){
+            String isbn = request.getParameter("book");
+                String nameEMP = request.getParameter("nameEMP");
+        }
     }
 
     /**

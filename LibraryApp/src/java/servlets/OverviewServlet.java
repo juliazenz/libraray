@@ -80,9 +80,9 @@ public class OverviewServlet extends HttpServlet {
         try {
             //  loadData();
             dba = DBAccess.getInstance();
-            bookList = dba.getBookFromList("C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\Projekt\\library\\LibraryApp\\web\\res\\Book_testdaten.csv");
+            bookList = dba.getBookFromList("C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\library\\LibraryApp\\web\\res\\Book_testdaten.csv");
             
-            String path = "C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\Projekt\\library\\LibraryApp\\web\\res\\Mitarbeiter_Liste_20151119.txt";
+            String path = "C:\\Users\\Julia\\Schule\\Kaindorf\\4BHIF\\SYP\\library\\LibraryApp\\web\\res\\Mitarbeiter_Liste_20151119.txt";
             FileReader fr = new FileReader(path);
             BufferedReader br = new BufferedReader(fr);
             String line = "";
