@@ -86,7 +86,11 @@ public class AddBookServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/jsp/addBook.jsp").forward(request, response);
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(AddBookServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
